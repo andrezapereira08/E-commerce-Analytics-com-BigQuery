@@ -1,212 +1,73 @@
-RESUMO DO PROJETO — E-commerce Analytics com BigQuery
+📊 Resumo do Projeto — E-commerce Analytics com BigQuery
 
-Este projeto consistiu na construção de um Data Warehouse analítico no BigQuery para avaliar o desempenho de vendas, clientes, produtos e eficiência logística de um e-commerce.
+Projeto de E-commerce Analytics focado na construção de um Data Warehouse analítico no Google BigQuery, com o objetivo de avaliar vendas, clientes, produtos e eficiência logística, suportando decisões estratégicas de negócio.
 
-Abaixo, o resumo de cada processo realizado:
+O trabalho envolveu desde a ingestão e modelagem dos dados até a criação de KPIs e dashboards analíticos.
 
-1. Criação do Data Warehouse (DW)
-Contexto
+🔧 Principais Entregas
 
-Os dados foram fornecidos em múltiplos arquivos CSV simulado um ambiente transacional: pedidos, itens de pedido, clientes, produtos, regiões e SLA logístico.
+Construção de um Data Warehouse (Star Schema) a partir de múltiplos arquivos CSV transacionais
 
-Ações
+Criação de tabelas fato e dimensões (calendário, cliente, produto e região)
 
-✔ Upload dos dados no BigQuery
-✔ Criação do dataset ecommerce_dw
-✔ Padronização dos tipos de dados (datas, numéricos e textos)
-✔ Criação das tabelas base:
+Desenvolvimento de views analíticas consolidadas para consumo em BI
 
-pedidos
-
-itens_pedido
-
-clientes
-
-produtos
-
-regiao
-
-sla_logistica
-
-Resultado
-
-Base sólida para construção de visões analíticas.
-
-2. Construção das Dimensões (Dimensional Model)
-Objetivo
-
-Criar tabelas auxiliares para facilitar análises por data, cliente, produto e região.
-
-Ações
-
-✔ dim_calendario: separa ano/mês/dia para análises temporais
-✔ dim_cliente: perfil e origem do cliente
-✔ dim_produto: categoria, preço unitário
-✔ dim_regiao: mapeamento geográfico
-
-Resultado
-
-Modelo mais limpo e preparado para análises OLAP.
-
-3. Criação da Fato de Vendas — fato_pedidos
-Objetivo
-
-Centralizar métricas do pedido com tipos corretamente convertidos.
-
-Ações
-
-✔ Conversões com SAFE_CAST
-✔ Normalização de campos
-✔ Cálculo do tempo de entrega real
-✔ Indicador de pedidos dentro/fora do SLA
-
-Resultado
-
-Uma tabela única e pronta para análises de faturamento, KPIs e eficiência.
-
-4. View Analítica Geral — vw_sales_analytics
-Objetivo
-
-Unificar dimensões + fatos para análises completas.
-
-Inclui
-
-Dados do pedido
-
-Regionais
-
-Características do produto
-
-Valores de venda
-
-Indicadores de SLA
-
-Resultado
-
-Visão única usada como base para todas as análises posteriores.
-
-5. KPI por Filial — vw_kpi_filial
-Objetivo
-
-Criar os principais KPIs de operação por regional.
-
-Métricas calculadas
+Cálculo de KPIs operacionais e financeiros, incluindo:
 
 Faturamento
 
-Total de pedidos
-
 Ticket médio
 
-% de pedidos dentro do SLA
+Volume de pedidos
+
+SLA logístico
 
 Prazo médio de entrega
 
-Resultado
+Análises estratégicas:
 
-Dashboard analítico por filial pronto para tomada de decisão.
+Evolução de faturamento por ano/mês
 
- 6. Análise de Faturamento por Ano/Mês
-Objetivo
+Ranking de filiais por receita
 
-Visualizar a evolução mensal das vendas.
+Ticket médio por canal de venda
 
-Inclui
+Produtos mais vendidos
 
-✔ Somatório do valor total
-✔ Formatação de mês por extenso
-✔ Ordenação cronológica
+Análise ABC (Curva de Pareto) para priorização de produtos
 
-Resultado
+Criação de dashboard final integrado, pronto para Looker Studio / Power BI
 
-Série temporal completa — ideal para gráficos de tendência.
+📈 Principais Insights Gerados
 
-7. Ranking de Faturamento por Filial
-Objetivo
+Identificação de filiais com maior e menor desempenho comercial
 
-Identificar quais regionais possuem maior potencial comercial.
+Avaliação da eficiência logística por região (% dentro do SLA)
 
-Resultado
+Identificação de produtos responsáveis por ~80% da receita (Classe A)
 
-Ranking automático das filiais do maior para o menor faturamento.
+Comparação de canais de venda, destacando maior ticket médio no APP
 
-8. Análise de SLA – Eficiência Logística
-Objetivo
+🛠 Tecnologias e Conceitos Utilizados
 
-Identificar quais filiais entregam mais dentro do SLA.
+Google BigQuery
 
-Resultado
+SQL avançado (CTEs, SAFE_CAST, agregações, ordenações, joins)
 
-Percentual por região com ordenação decrescente (melhor performance no topo).
+Modelagem Dimensional (Star Schema)
 
-9. Ticket Médio por Canal de Venda
-Objetivo
+KPIs de BI e Analytics (SLA, ticket médio, ABC, séries temporais)
 
-Comparar a qualidade dos canais (APP, Web, Loja Física).
+Base preparada para dashboards executivos
 
-Resultado
+🚀 Conclusão
 
-APP apresentou maior ticket médio → insights de comportamento do cliente.
+O projeto demonstra domínio em:
 
- 10. Produtos Mais Vendidos
-Objetivo
+Construção completa de Data Warehouses analíticos
 
-Identificar mix de produtos mais relevantes.
+Modelagem de dados para BI
 
-Métricas
+Transformação de dados brutos em insights acionáveis
 
-Quantidade vendida
-
-Receita por item
-
-Categoria do produto
-
-Resultado
-
-Ranking dos produtos com maior impacto no faturamento.
-
-11. Análise ABC (Curva Pareto de Produtos)
-Objetivo
-
-Classificar produtos conforme sua importância no faturamento.
-
-Resultado
-
-Classe A → produtos que representam ~80% da receita
-
-Classe B → próximos 15%
-
-Classe C → cauda longa
-
-Ferramenta poderosa para gestão de estoque e priorização comercial.
-
-12. Dashboard Final — KPIs Integrados
-Objetivo
-
-Oferecer visão única do negócio consolidando:
-
-Faturamento
-
-Ticket médio
-
-SLA
-
-Receita por produto
-
-Performance por filial
-
-Evolução mensal
-
-Resultado
-
-Ambiente analítico totalmente funcional pronto para tomada de decisão.
-
-🚀 CONCLUSÃO
-
-Este projeto demonstra:
-
-✔ Construção completa de um DW em BigQuery
-✔ Domínio de modelagem dimensional (Star Schema)
-✔ Criação de views analíticas e KPIs avançados
-✔ Aplicação de conceitos de BI: SLA, ticket médio, ABC, evolução temporal, performance regional
-✔ Base ideal para dashboards em Looker Studio, Power BI ou Data Studio
+Criação de métricas estratégicas para e-commerce e operações logísticas
